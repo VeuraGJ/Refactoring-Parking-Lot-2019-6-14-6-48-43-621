@@ -3,6 +3,7 @@ package com.thoughtworks.tdd;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class ParkingBoy implements Parkable, Fetchable {
     private List<ParkingLot> parkingLots;
@@ -35,17 +36,18 @@ public class ParkingBoy implements Parkable, Fetchable {
     }
     @Override
     public Car fetchCar(Ticket ticket) throws Exception {
-        for(int i=0 ;i<parkingLots.size();i++){
-            try {
-                return parkingLots.get(i).fetchCar(ticket);
-            } catch (Exception e) {
-                if(i < parkingLots.size()-1){
-                    continue;
-                }
-                throw e;
-            }
+        if(ticket == null){
+            throw new Exception("Please provide your parking ticket.");
         }
-        return null;
+        List<ParkingLot> parkingLotContainsCar = parkingLots.stream()
+                .filter(parkingLot -> parkingLot.getEmptyPosition() < parkingLot.getCapacity())
+                .filter(parkingLot -> parkingLot.isCarInParkingLot(ticket))
+                .collect(Collectors.toList());
+        if(parkingLotContainsCar.size() == 0){
+            throw new Exception("Unrecognized parking ticket.");
+        }
+        return  parkingLotContainsCar.get(0).fetchCar(ticket);
+
     }
 
     public void manageParkingLot(ParkingLot parkingLot) {
