@@ -33,6 +33,7 @@ public class Customer  {
     public String fetchMyCar(){
         try {
             Car car = fetchable.fetchCar(parkingTicket);
+            setParkingTicket(null);
             setMyCar(car);
         } catch (Exception e) {
             return e.getMessage();

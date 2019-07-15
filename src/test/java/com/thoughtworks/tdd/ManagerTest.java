@@ -18,9 +18,11 @@ public class ManagerTest {
         ParkingLot secondParkingLot = new ParkingLot();
         parkingLotList.add(firstParkingLot);
         parkingLotList.add(secondParkingLot);
-        Manager manager = new Manager(parkingLotList);
+        parkingBoy.setParkingLots(parkingLotList);
+        Manager manager = new Manager();
+        manager.setParkingLots(parkingLotList);
         //when
-        manager.manageParkingBoy(parkingBoy,parkingLotList);
+        manager.manageParkingBoy(parkingBoy);
         manager.setParkable(parkingBoy);
         Ticket ticket = manager.specifyParkingBoyParkCar(car);
         Car fetchCar = parkingBoy.fetchCar(ticket);
@@ -37,9 +39,10 @@ public class ManagerTest {
         ParkingLot secondParkingLot = new ParkingLot();
         parkingLotList.add(firstParkingLot);
         parkingLotList.add(secondParkingLot);
-        Manager manager = new Manager(parkingLotList);
+        Manager manager = new Manager();
+        parkingBoy.setParkingLots(parkingLotList);
         //when
-        manager.manageParkingBoy(parkingBoy,parkingLotList);
+        manager.manageParkingBoy(parkingBoy);
         manager.setParkable(parkingBoy);
         manager.setFetchable(parkingBoy);
         Ticket ticket = manager.specifyParkingBoyParkCar(car);
@@ -56,7 +59,8 @@ public class ManagerTest {
         ParkingLot secondParkingLot = new ParkingLot();
         parkingLotList.add(firstParkingLot);
         parkingLotList.add(secondParkingLot);
-        Manager manager = new Manager(parkingLotList);
+        Manager manager = new Manager();
+        manager.setParkingLots(parkingLotList);
         ParkingLot managedParkingLot = new ParkingLot();
         manager.manageParkingLot(managedParkingLot);
         //when
@@ -75,8 +79,9 @@ public class ManagerTest {
         parkingLotList.add(firstParkingLot);
         parkingLotList.add(secondParkingLot);
         ParkingBoy parkingBoy = new ParkingBoy();
-        Manager manager = new Manager(parkingLotList);
-        manager.manageParkingBoy(parkingBoy,parkingLotList);
+        Manager manager = new Manager();
+        parkingBoy.setParkingLots(parkingLotList);
+        manager.manageParkingBoy(parkingBoy);
         manager.setFetchable(parkingBoy);
         Customer customer = new Customer();
         customer.setMyCar(car);
@@ -101,8 +106,10 @@ public class ManagerTest {
         parkingLotList.add(firstParkingLot);
         parkingLotList.add(secondParkingLot);
         ParkingBoy parkingBoy = new ParkingBoy();
-        Manager manager = new Manager(parkingLotList);
-        manager.manageParkingBoy(parkingBoy,parkingLotList);
+        Manager manager = new Manager();
+        manager.setParkingLots(parkingLotList);
+        parkingBoy.setParkingLots(parkingLotList);
+        manager.manageParkingBoy(parkingBoy);
         manager.setFetchable(parkingBoy);
         Customer customer = new Customer();
         customer.setMyCar(car);
@@ -124,8 +131,10 @@ public class ManagerTest {
         ParkingLot parkingLot = new ParkingLot();
         parkingLotList.add(parkingLot);
         ParkingBoy parkingBoy = new ParkingBoy();
-        Manager manager = new Manager(parkingLotList);
-        manager.manageParkingBoy(parkingBoy,parkingLotList);
+        Manager manager = new Manager();
+        manager.setParkingLots(parkingLotList);
+        parkingBoy.setParkingLots(parkingLotList);
+        manager.manageParkingBoy(parkingBoy);
         manager.setParkable(parkingBoy);
         Customer customer = new Customer();
         customer.setMyCar(eleventhCar);

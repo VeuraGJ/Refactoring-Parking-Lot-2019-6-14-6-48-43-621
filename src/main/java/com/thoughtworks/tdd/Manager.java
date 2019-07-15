@@ -1,17 +1,16 @@
 package com.thoughtworks.tdd;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 public class Manager extends ParkingBoy{
-    private HashMap<ParkingBoy, List<ParkingLot>> managementList;
-    private List<ParkingLot> prividedParkingLots;
+    private List<ParkingBoy> managementList;
     private Parkable parkable;
     private Fetchable fetchable;
 
-    public Manager(List<ParkingLot> prividedParkingLots) {
-        this.prividedParkingLots = prividedParkingLots;
-        managementList = new HashMap<>();
+    public Manager() {
+        managementList = new ArrayList<>();
     }
 
     public void setParkable(Parkable parkable) {
@@ -40,9 +39,8 @@ public class Manager extends ParkingBoy{
         }
     }
 
-    public void manageParkingBoy(ParkingBoy parkingBoy, List<ParkingLot> parkingLots){
-        parkingBoy.setParkingLots(parkingLots);
-        this.managementList.put(parkingBoy,parkingLots);
+    public void manageParkingBoy(ParkingBoy parkingBoy){
+        this.managementList.add(parkingBoy);
     }
 
     public Ticket specifyParkingBoyParkCar(Car car) throws Exception {
