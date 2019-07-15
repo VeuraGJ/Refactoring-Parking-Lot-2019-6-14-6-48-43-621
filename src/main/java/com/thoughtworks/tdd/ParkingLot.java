@@ -4,7 +4,7 @@ package com.thoughtworks.tdd;
 
 import java.util.HashMap;
 
-public class ParkingLot implements Parkable, Fetchable {
+public class ParkingLot  {
     private HashMap<Ticket,Car> parkingTicketCar;
     private int capacity = 10;
 
@@ -18,16 +18,11 @@ public class ParkingLot implements Parkable, Fetchable {
     }
 
 
-    @Override
-    public Ticket parkCar(Car car) throws Exception {
-        if(parkingTicketCar.size() == capacity){
-            throw new Exception("Not enough position.");
-        }
+    public Ticket parkCar(Car car) {
         Ticket ticket = new Ticket();
         parkingTicketCar.put(ticket,car);
         return ticket;
     }
-    @Override
     public Car fetchCar(Ticket ticket) throws Exception{
         if(ticket == null){
             throw new Exception("Please provide your parking ticket.");

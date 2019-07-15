@@ -1,19 +1,22 @@
 package com.thoughtworks.tdd;
 
+import java.util.Comparator;
 import java.util.List;
 
 public class SuperSmartParkingBoy extends ParkingBoy {
     @Override
     public Ticket parkCar(Car car) throws Exception {
-        double maxAvailablePositionRate = -1d;
-        int parkingLotIndex = 0;
-        List<ParkingLot> parkingLotList = super.getParkingLots();
-        for(int i=0;i<parkingLotList.size();i++){
-            if(parkingLotList.get(i).getAvailablePositionRate()> maxAvailablePositionRate){
-                maxAvailablePositionRate = parkingLotList.get(i).getAvailablePositionRate();
-                parkingLotIndex = i;
-            }
+        List<ParkingLot> parkingLots= super.getParkingLots();
+        long parkingLothasEmptyPostionCount = parkingLots.stream()
+                .filter(parkingLot -> parkingLot.getEmptyPosition() > 0)
+                .count();
+        if(parkingLothasEmptyPostionCount == 0){
+            throw new Exception("Not enough position.");
         }
-        return parkingLotList.get(parkingLotIndex).parkCar(car);
+        return parkingLots.stream()
+                .filter(parkingLot -> parkingLot.getEmptyPosition() > 0)
+                .max(Comparator.comparingDouble(ParkingLot::getAvailablePositionRate))
+                .get()
+                .parkCar(car);
     }
 }

@@ -2,6 +2,7 @@ package com.thoughtworks.tdd;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ParkingBoy implements Parkable, Fetchable {
     private List<ParkingLot> parkingLots;
@@ -20,17 +21,17 @@ public class ParkingBoy implements Parkable, Fetchable {
 
     @Override
     public Ticket parkCar(Car car) throws Exception {
-        for(int i=0 ;i<parkingLots.size();i++){
-            try {
-                return parkingLots.get(i).parkCar(car);
-            } catch (Exception e) {
-                if(i < parkingLots.size()-1){
-                    continue;
-                }
-                throw e;
-            }
+        long parkingLothasEmptyPostionCount = parkingLots.stream()
+                .filter(parkingLot -> parkingLot.getEmptyPosition() > 0)
+                .count();
+        if(parkingLothasEmptyPostionCount == 0){
+            throw new Exception("Not enough position.");
         }
-        return null;
+        return parkingLots.stream()
+                .filter(parkingLot -> parkingLot.getEmptyPosition() > 0)
+                .collect(Collectors.toList())
+                .get(0)
+                .parkCar(car);
     }
     @Override
     public Car fetchCar(Ticket ticket) throws Exception {
