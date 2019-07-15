@@ -45,6 +45,6 @@ public class ParkingLot implements Parkable, Fetchable {
     }
 
     public double getAvailablePositionRate() {
-        return getEmptyPosition() /( capacity * 1.0);
+        return getEmptyPosition() /(double)capacity;
     }
 }
