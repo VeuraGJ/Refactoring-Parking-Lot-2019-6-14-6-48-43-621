@@ -7,7 +7,7 @@ public class ParkingBoy implements Parkable, Fetchable {
     private List<ParkingLot> parkingLots;
 
     public ParkingBoy() {
-        parkingLots = new ArrayList<>(2);
+        parkingLots = new ArrayList<>();
     }
 
     public List<ParkingLot> getParkingLots() {

@@ -17,9 +17,6 @@ public class ParkingLot implements Parkable, Fetchable {
         this.capacity = capacity;
     }
 
-    public HashMap<Ticket, Car> getParkingTicketCar() {
-        return parkingTicketCar;
-    }
 
     @Override
     public Ticket parkCar(Car car) throws Exception {
