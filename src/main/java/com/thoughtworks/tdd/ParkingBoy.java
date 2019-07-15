@@ -22,9 +22,7 @@ public class ParkingBoy implements Parkable, Fetchable {
 
     @Override
     public Ticket parkCar(Car car) throws Exception {
-        long parkingLothasEmptyPostionCount = parkingLots.stream()
-                .filter(parkingLot -> parkingLot.getEmptyPosition() > 0)
-                .count();
+        long parkingLothasEmptyPostionCount = getParkingLothasEmptyPostionNumber();
         if(parkingLothasEmptyPostionCount == 0){
             throw new Exception("Not enough position.");
         }
@@ -34,6 +32,13 @@ public class ParkingBoy implements Parkable, Fetchable {
                 .get(0)
                 .parkCar(car);
     }
+
+    protected long getParkingLothasEmptyPostionNumber() {
+        return parkingLots.stream()
+                    .filter(parkingLot -> parkingLot.getEmptyPosition() > 0)
+                    .count();
+    }
+
     @Override
     public Car fetchCar(Ticket ticket) throws Exception {
         if(ticket == null){
